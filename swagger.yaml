@@ -2,7 +2,8 @@ openapi: 3.0.0
 info:
   title: API Automatic Payments - Open Finance Brasil
   description: |
-    TESTE de Release 31 API de Iniciação de Pagamentos automáticos, responsável por viabilizar as operações de iniciação de pagamentos automáticos (Pix automático e Transferências Inteligentes) para o Open Finance Brasil. 
+    API de Iniciação de Pagamentos automáticos, responsável por viabilizar as operações de iniciação de pagamentos automáticos (Pix automático e Transferências Inteligentes) para o Open Finance Brasil. 
+    Para cada uma das formas de pagamento previstas é necessário obter prévio consentimento do cliente através dos endpoints dedicados ao consentimento nesta API.
 
     # Orientações
     - `CONTA`, referente às instituições detentoras de conta participantes do Open Finance Brasil;
@@ -181,7 +182,7 @@ info:
     Não é permitido ao usuário pagador o cancelamento de uma nova tentativa de pagamento, realizada pelo recebedor, quando autorizado no consentimento (campo “/data/recurringConfiguration/automatic/isRetryAccepted” como “True”) pelo usuário pagador ou quando o Iniciador precisar enviar um novo endToEndId. 
     Aplica-se tanto para a tentativa intradia quanto para a tentativa em dias subsequentes. É permitido ao recebedor o cancelamento das novas tentativas em dias subsequentes. Aplicam-se as regras de cancelamento da tentativa original, conforme previsto na descrição do endpoint PATCH /pix/recurringPayments Pagamentos que são novas tentativas, intradia ou em dias subsequentes, podem ser identificados pela presença do campo “/data/originalRecurringPaymentId” no recurso. 
   
-  version: 2.1.0-rc.1
+  version: 2.0.0-rc.1
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
@@ -385,7 +386,7 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateRecurringPixPayment'
         description: Payload para criação da iniciação do pagamento Pix.
-        required: false
+        required: true
       responses:
         '201':
           $ref: '#/components/responses/201RecurringPaymentsIdPost'
@@ -548,7 +549,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchPixPayment'
         description: Atualização do Pagamento Recorrente.
-        required: false
+        required: true
       responses:
         '200':
           $ref: '#/components/responses/200RecurringPaymentsIdPatch'
@@ -901,7 +902,7 @@ components:
             identification:
               type: string
               maxLength: 14
-              description: Números dos documentos de identificação oficial do titular pessoa jurídica.
+              description: Número do documento de identificação oficial do titular pessoa jurídica.
               example: '11111111111111'
               pattern: '^\d{14}$'
             rel:
@@ -917,7 +918,7 @@ components:
       properties:
         data:
           type: object
-          description: Objetos contendo as informações de consentimento para a iniciação de pagamento individuais.
+          description: Objeto contendo as informações de consentimento para a iniciação de pagamento individual.
           required:
             - loggedUser
             - creditors
@@ -1350,7 +1351,7 @@ components:
       properties:
         deviceId:
           type: string
-          description: ID não único do dispositivo gerado pela plataforma.
+          description: ID único do dispositivo gerado pela plataforma.
           example: 00000000-54b3-e7c7-0000-000046bffd97
         isRootedDevice:
           type: boolean
@@ -1369,7 +1370,7 @@ components:
           description: Indica por quanto tempo (em milissegundos) o dispositivo está ligado.
         osVersion:
           type: string
-          description: Versão do sistema operacional Windows.
+          description: Versão do sistema operacional.
         userTimeZoneOffset:
           type: string
           description: |
@@ -1428,7 +1429,7 @@ components:
           description: Indica se o dispositivo está em modo de desenvolvedor.
         isMockGPS:
           type: boolean
-          description: Indica se o dispositivo está usando um GPS falso ou não.
+          description: Indica se o dispositivo está usando um GPS falso.
         isEmulated:
           type: boolean
           description: Indica se o dispositivo é emulado ou real.
