@@ -196,7 +196,7 @@ info:
     Aplica-se tanto para a tentativa intradia quanto para a tentativa em dias subsequentes. É permitido ao recebedor o cancelamento das novas tentativas em dias subsequentes. Aplicam-se as regras de cancelamento da tentativa original, conforme previsto na descrição do endpoint PATCH /pix/recurringPayments.  
     Pagamentos que são novas tentativas, intradia ou em dias subsequentes, podem ser identificados pela presença do campo “/data/originalRecurringPaymentId” no recurso. 
   
-  version: 2.2.1
+  version: 3.0.0-beta.1
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
@@ -205,9 +205,9 @@ info:
     email: gt-interfaces@openbankingbr.org
     url: 'https://openbanking-brasil.github.io/areadesenvolvedor/'
 servers:
-  - url: 'https://api.banco.com.br/open-banking/automatic-payments/v2'
+  - url: 'https://api.banco.com.br/open-banking/automatic-payments/v3'
     description: Servidor de Produção
-  - url: 'https://apih.banco.com.br/open-banking/automatic-payments/v2'
+  - url: 'https://apih.banco.com.br/open-banking/automatic-payments/v3'
     description: Servidor de Homologação
 tags:
   - name: Recurring Consents
@@ -2898,10 +2898,10 @@ components:
               format: date-time
               pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$'
               description: |
-                Description: Data e hora em que o consentimento deve passar a ser válido. 
+                Data e hora em que o consentimento deve passar a ser válido. 
                 Uma string com data e hora conforme especificação [RFC-3339](https://datatracker.ietf.org/doc/html/rfc3339), sempre com a utilização de timezone UTC(UTC time format).
 
-                [Restrição] Caso esse campo não seja enviado pelo iniciador na requisição, o detentor deve preencher esse campo com o mesmo valor atribuído ao campo /data/creationDateTime.
+                [Restrição] Só deve ser enviado pelo ITP caso o consentimento passe a valer a partir de D+1, sendo D o dia de criação do consentimento. Caso esse campo não seja enviado pelo ITP na requisição, o detentor deve preencher esse campo com o mesmo valor atribuído ao campo /data/creationDateTime e retorná-lo nas mensagens relacionadas ao recurso.
               example: '2023-05-21T08:30:00Z'
     Sweeping:
       type: object
@@ -2941,10 +2941,10 @@ components:
               format: date-time
               pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$'
               description: |
-                Description: Data e hora em que o consentimento deve passar a ser válido. 
+                Data e hora em que o consentimento deve passar a ser válido. 
                 Uma string com data e hora conforme especificação [RFC-3339](https://datatracker.ietf.org/doc/html/rfc3339), sempre com a utilização de timezone UTC(UTC time format).
 
-                [Restrição] Caso esse campo não seja enviado pelo iniciador na requisição, o detentor deve preencher esse campo com o mesmo valor atribuído ao campo /data/creationDateTime.
+                [Restrição] Só deve ser enviado pelo ITP caso o consentimento passe a valer a partir de D+1, sendo D o dia de criação do consentimento. Caso esse campo não seja enviado pelo ITP na requisição, o detentor deve preencher esse campo com o mesmo valor atribuído ao campo /data/creationDateTime e retorná-lo nas mensagens relacionadas ao recurso.
               example: '2023-05-21T08:30:00Z'
     PeriodicLimits:
       type: object
