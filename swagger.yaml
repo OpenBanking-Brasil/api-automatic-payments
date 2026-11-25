@@ -71,7 +71,7 @@ info:
         &ensp;1.3.2 **Semânticos**  
           &emsp;1.3.2.1 Data de pagamento: Valida se a data de pagamento enviada é válida para a forma de pagamento selecionada (DATA_PAGAMENTO_INVALIDA);  
           &emsp;1.3.2.2 Detalhes do pagamento: Valida se determinado parâmetro informado obedece às regras de negócio (DETALHE_PAGAMENTO_INVALIDO);  
-          &emsp;1.3.2.3 Demais validações não explicitamente informadas (ex. suspeita de fraude): (NAO_INFORMADO);  
+          &emsp;1.3.2.3 Consentimento recusado exclusivamente em razão de tratamento de risco/antifraude pela detentora, em que a divulgação do motivo específico comprometeria controles de segurança. Vedado o uso para recusas que não sejam relacionadas a aspectos de segurança ou fraude: (NAO_INFORMADO).  
           &emsp;1.3.2.4 Idempotência: Valida se há divergência entre chave de idempotência e informações enviadas (ERRO_IDEMPOTENCIA);  
           &emsp;1.3.2.5 Funcionalidade não habilitada: A detentora de conta não oferece o serviço nessa modalidade (FUNCIONALIDADE_NAO_HABILITADA).  
 
@@ -87,7 +87,7 @@ info:
 
     3. **Demais validações executadas durante o processamento assíncrono do consentimento pela detentora, poderão ser consultados pela iniciadora através dos endpoints GET /recurring-consents/{recurringConsentId} previstos com retorno HTTP Code 200 - OK com status REVOKED e revocationReason conforme abaixo (detalhamento adicional na documentação técnica da API).**  
       3.1 **Demais validações durante o processamento assíncrono:**  
-        &ensp;3.1.1 Nao informado: Validações não explicitamente informadas (ex. suspeita de fraude) (NAO_INFORMADO);  
+        &ensp;3.1.1 Nao informado: Consentimento revogado exclusivamente em razão de tratamento de risco/antifraude pela detentora, em que a divulgação do motivo específico comprometeria controles de segurança. Vedado o uso para revogações que não sejam relacionadas a aspectos de segurança ou fraude: (NAO_INFORMADO).  
         &ensp;3.1.2 Revogado pelo recebedor: O usuário recebedor solicitou explicitamente ao iniciador a revogação do consentimento (ex: término de contrato) (REVOGADO_RECEBEDOR);  
         &ensp;3.1.3 Revogado pelo pagador: O usuário pagador solicitou explicitamente a revogação do consentimento (REVOGADO_USUARIO).  
 
