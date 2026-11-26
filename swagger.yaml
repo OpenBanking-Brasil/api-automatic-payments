@@ -829,6 +829,7 @@ components:
                   - FALTAM_SINAIS_OBRIGATORIOS_PLATAFORMA
                   - PARAMETRO_INVALIDO
                   - PARAMETRO_NAO_INFORMADO
+                  - ERRO_IDEMPOTENCIA
                 example: CAMPO_NAO_PERMITIDO
               title:
                 type: string
@@ -844,6 +845,7 @@ components:
                   - FALTAM_SINAIS_OBRIGATORIOS_PLATAFORMA: Os sinais obrigatórios para a plataforma do usuário não foram enviados em sua totalidade.
                   - PARAMETRO_INVALIDO: Os parâmetros informados não obedecem a formatação especificada.
                   - PARAMETRO_NAO_INFORMADO: Algum ou todos os campos obrigatórios não foram informados.
+                  - ERRO_IDEMPOTENCIA: Erro idempotência.
               detail:
                 type: string
                 maxLength: 2048
@@ -858,6 +860,7 @@ components:
                   - FALTAM_SINAIS_OBRIGATORIOS_PLATAFORMA: Os sinais obrigatórios para a plataforma do usuário não foram enviados em sua totalidade.
                   - PARAMETRO_INVALIDO: Os parâmetros informados não obedecem a formatação especificada.
                   - PARAMETRO_NAO_INFORMADO: Algum ou todos os campos obrigatórios não foram informados.
+                  - ERRO_IDEMPOTENCIA: Conteúdo da mensagem (claim data) diverge do conteúdo associado a esta chave de idempotência (x-idempotency-key).
         meta:
           $ref: '#/components/schemas/Meta'
     422ResponseErrorCreateRetryPixRecurringPayment:
@@ -1071,12 +1074,14 @@ components:
                   - CANCELAMENTO_FORA_PERIODO_PERMITIDO
                   - PARAMETRO_INVALIDO
                   - PARAMETRO_NAO_INFORMADO
+                  - ERRO_IDEMPOTENCIA
                 example: PAGAMENTO_NAO_PERMITE_CANCELAMENTO
                 description: |
                   - PAGAMENTO_NAO_PERMITE_CANCELAMENTO: Pagamento está com um status que não permite cancelamento.
                   - CANCELAMENTO_FORA_PERIODO_PERMITIDO: O usuário solicitou o cancelamento fora da janela de tempo permitido.
                   - PARAMETRO_INVALIDO: Os parâmetros informados não obedecem a formatação especificada.
                   - PARAMETRO_NAO_INFORMADO: Algum ou todos os campos obrigatórios não foram informados.
+                  - ERRO_IDEMPOTENCIA: Erro idempotência.
               title:
                 type: string
                 maxLength: 255
@@ -1087,6 +1092,7 @@ components:
                   - CANCELAMENTO_FORA_PERIODO_PERMITIDO: O usuário solicitou o cancelamento fora da janela de tempo permitido.
                   - PARAMETRO_INVALIDO: Os parâmetros informados não obedecem a formatação especificada.
                   - PARAMETRO_NAO_INFORMADO: Algum ou todos os campos obrigatórios não foram informados.
+                  - ERRO_IDEMPOTENCIA: Erro idempotência.
               detail:
                 type: string
                 maxLength: 2048
@@ -1097,6 +1103,7 @@ components:
                   - CANCELAMENTO_FORA_PERIODO_PERMITIDO: O usuário solicitou o cancelamento fora da janela de tempo permitido.
                   - PARAMETRO_INVALIDO: Os parâmetros informados não obedecem a formatação especificada.
                   - PARAMETRO_NAO_INFORMADO: Algum ou todos os campos obrigatórios não foram informados.
+                  - ERRO_IDEMPOTENCIA: Erro idempotência.
         meta:
           $ref: '#/components/schemas/Meta'
     BusinessEntity:
